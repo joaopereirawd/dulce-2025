@@ -16,9 +16,10 @@ type GLTFResult = GLTF & {
 
 type ModelProps = JSX.IntrinsicElements['group'] & {
   photoTexture?: THREE.Texture // Adiciona a prop para a textura
+  rotation: Boolean
 }
 
-export function Model({ photoTexture, ...props }: ModelProps) {
+export function Model({ photoTexture, rotation, ...props }: ModelProps) {
   const { nodes, materials } = useGLTF('/scene.gltf') as GLTFResult
 
   // Cria um clone do material para evitar modificar o material original
@@ -35,9 +36,7 @@ export function Model({ photoTexture, ...props }: ModelProps) {
 
   return (
     <group {...props} dispose={null}>
-      <group>
-        <meshStandardMaterial metalness={0.3} roughness={0.7} />
-
+      <group rotation={[0, 0, rotation ? Math.PI * -0.5 : 0]}>
         <mesh
           castShadow
           receiveShadow
