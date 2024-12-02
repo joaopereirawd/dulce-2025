@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '@styles/pillMenu.module.scss';
+import Link from 'next/link'
 
 export function MenuPill() {
     const pillRef = useRef<HTMLDivElement>(null);
@@ -47,9 +48,9 @@ export function MenuPill() {
             <div className={styles.content}>
                 <div id={styles.pill} ref={pillRef}></div>
                 <div id={styles.items} ref={itemsRef}>
-                    <div className={`${styles.item} ${styles.active}`}>Home</div>
-                    <div className={styles.item}>Work</div>
-                    <div className={styles.item}>About</div>
+                    <Link className={styles.item} href="/">Home</Link>
+                    <Link className={styles.item} href="/work">Work</Link>
+                    <Link className={styles.item} href="/about">About</Link>
                 </div>
             </div>
         </div>
