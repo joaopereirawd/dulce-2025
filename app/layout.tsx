@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import LenisScrollProvider from "@components/lenis";
 import Scene from "@components/scene";
+import { MenuPill } from "@components/pillMenu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,10 +39,12 @@ export default function RootLayout({
             width: "100%",
             height: "100%",
             zIndex: 999,
-            pointerEvents: "none",
           }}
         >
           <Scene />
+
+          <MenuPill />
+
         </div>
 
         <LenisScrollProvider>
