@@ -36,6 +36,8 @@ export function Model({ photoTexture, ...props }: ModelProps) {
   return (
     <group {...props} dispose={null}>
       <group>
+        <meshStandardMaterial metalness={0.3} roughness={0.7} />
+
         <mesh
           castShadow
           receiveShadow

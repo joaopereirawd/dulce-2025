@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import styles from '@styles/pillMenu.module.scss';
 
 export function MenuPill() {
     const pillRef = useRef<HTMLDivElement>(null);
@@ -8,7 +9,7 @@ export function MenuPill() {
     const [selected, setSelected] = useState(0);
 
     useEffect(() => {
-        const menuLinks = itemsRef.current?.querySelectorAll<HTMLDivElement>('.item');
+        const menuLinks = itemsRef.current?.querySelectorAll<HTMLDivElement>(`.${styles.item}`);
 
         const setPill = () => {
             if (!menuLinks || !pillRef.current) return;
@@ -22,34 +23,33 @@ export function MenuPill() {
                     pillRef.current.style.height = `${dimensions.height}px`;
                     pillRef.current.style.left = `${dimensions.left - parentDimensions.left}px`;
 
-                    item.classList.add('active');
+                    item.classList.add(styles.active);
                 } else {
-                    item.classList.remove('active');
+                    item.classList.remove(styles.active);
                 }
             });
         };
 
         setPill();
 
-        // Add event listeners dynamically
+        // Adiciona event listeners dinamicamente
         menuLinks?.forEach((item, index) => {
             const handleClick = () => setSelected(index);
             item.addEventListener('click', handleClick);
 
-            // Cleanup on unmount
+            // Limpa os event listeners na desmontagem
             return () => item.removeEventListener('click', handleClick);
         });
     }, [selected]);
 
     return (
-        <div id="menu">
-            <div className="content">
-                <div id="pill" ref={pillRef}></div>
-                <div id="items" ref={itemsRef}>
-                    <div className="item active">Home</div>
-                    <div className="item">Work</div>
-                    <div className="item">About</div>
-                    <div className="item">Contact</div>
+        <div id={styles.menu}>
+            <div className={styles.content}>
+                <div id={styles.pill} ref={pillRef}></div>
+                <div id={styles.items} ref={itemsRef}>
+                    <div className={`${styles.item} ${styles.active}`}>Home</div>
+                    <div className={styles.item}>Work</div>
+                    <div className={styles.item}>About</div>
                 </div>
             </div>
         </div>
