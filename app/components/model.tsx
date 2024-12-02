@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
@@ -21,11 +21,17 @@ type ModelProps = JSX.IntrinsicElements['group'] & {
 export function Model({ photoTexture, ...props }: ModelProps) {
   const { nodes, materials } = useGLTF('/scene.gltf') as GLTFResult
 
-  // Atualiza o material PHOTO_5 com a textura recebida
-  if (photoTexture) {
-    materials.PHOTO_5.map = photoTexture
-    materials.PHOTO_5.needsUpdate = true // Garante que o material seja atualizado
-  }
+  // Cria um clone do material para evitar modificar o material original
+  const photoMaterial = useMemo(() => {
+    const material = materials.PHOTO_5.clone()
+
+    if (photoTexture) {
+      material.map = photoTexture
+      material.needsUpdate = true
+    }
+
+    return material
+  }, [materials.PHOTO_5, photoTexture])
 
   return (
     <group {...props} dispose={null}>
@@ -40,7 +46,7 @@ export function Model({ photoTexture, ...props }: ModelProps) {
           castShadow
           receiveShadow
           geometry={nodes.Object_5_2.geometry}
-          material={materials.PHOTO_5} // Material atualizado
+          material={photoMaterial} // Use o material clonado
         />
       </group>
     </group>
