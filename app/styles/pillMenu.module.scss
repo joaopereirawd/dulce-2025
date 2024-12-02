@@ -1,0 +1,55 @@
+#menu {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+
+    .content {
+        position: relative;
+
+        #pill {
+            @apply absolute bg-brand;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            color: #fff;
+            border-radius: 2rem;
+            transition: left 0.5s ease, width 0.5s ease;
+        }
+
+        #items {
+            display: flex;
+            overflow: hidden;
+            //background-color: #fff;
+            border-radius: 2rem;
+            //box-shadow: 0 0 0 4px #fff;
+            padding: 7px;
+
+
+            &:before {
+                @apply absolute w-full h-full backdrop-blur-lg;
+                border-radius: 2rem;
+                content: '';
+                z-index: -1;
+                top: 0;
+                left: 0;
+            }
+
+            .item {
+                padding: 0.75rem 1.25rem;
+                border-radius: 2rem;
+                cursor: pointer;
+                z-index: 1;
+                transition: 1s ease;
+
+                &.active {
+                    @apply text-black;
+                }
+
+                &:not(.active):hover {
+                    @apply text-brand;
+                }
+            }
+        }
+    }
+}
