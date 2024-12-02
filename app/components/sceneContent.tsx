@@ -14,19 +14,36 @@ export function SceneContent() {
 
         {
             url: "/photos/01.jpg",
-            position: [-1.1, 0, 0]
+            position: [-1.22, 0, 0],
+            rotation: false
         },
         {
-            url: "/photos/02.jpg",
-            position: [0, 0.2, 0]
+            url: "/photos/06.jpg",
+            position: [0, 0, 0],
+            rotation: true
         },
         {
             url: "/photos/03.jpg",
-            position: [1.1, 0, 0]
+            position: [1.22, 0, 0],
+            rotation: false
+
+        },
+        //New line
+        {
+            url: "/photos/05.jpg",
+            position: [-1.1, -1.34, 0],
+            rotation: false
         },
         {
             url: "/photos/04.jpg",
-            position: [0, -1.15, 0]
+            position: [0, -1.22, 0],
+            rotation: false
+        },
+
+        {
+            url: "/photos/06.jpg",
+            position: [1.1, -1.35, 0],
+            rotation: false
         }
     ]
 
@@ -39,6 +56,7 @@ export function SceneContent() {
                 <Model
                     key={index}
                     position={item.position}
+                    rotation={item.rotation}
                     photoTexture={photoTextures[index]}
                 />
             ))}
